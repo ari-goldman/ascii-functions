@@ -59,7 +59,7 @@ const graph = () => {
 }
 
 const updateLines = () => {
-    for(let i = 0; i < texts.length; i++){
+    for(let i = 1; i < texts.length - 1; i++){
         lines[i].innerHTML = texts[i];
     }
 }
@@ -80,7 +80,10 @@ const makeLines = () => {
     }
     
     texts[0] = functions[funcnum][0];
-    texts[lines.length - 1] = 'ari-goldman | <a href="https://github.com/ari-goldman/ascii-functions/settings/pages">github</a>';
+    texts[lines.length - 1] = 'ari-goldman | <a href="https://github.com/ari-goldman/" target="_blank">github</a>';
+
+    lines[0].innerHTML = texts[0];
+    lines[texts.length - 1].innerHTML = texts[texts.length - 1];
     graph();
 }
 
