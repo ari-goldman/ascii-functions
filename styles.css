@@ -2,26 +2,11 @@
     padding: 0px;
     margin: 0px;
 
-
-    /* Palette: https://lospec.com/palette-list/sealava */
-
-    --col1:#105189;
-    --col2:#3c7c9a;
-    --col3:#6ea096;
-    --col4:#beae64;
-    --col5:#ffbc42;
-    --col6:#f69248;
-    --col7:#eb5b42;
-    --col8:#cb203c;
-    --col9:#891545;
-
-    --blek: #080008;
-    --whyt: #f0fff0;
-
-    background-color: var(--blek);
     overflow: hidden;
 
-    color: var(--whyt);
+    /* Palette by Slynyrd: https://lospec.com/palette-list/steam-lords */
+    background-color: #2f213b;
+    color: #a0b9ba;
 }
 
 body {
@@ -34,18 +19,14 @@ body {
 #container {
     display: flex;
     flex-direction: column;
-    border: black dashed 1px;
     justify-content: center;
     align-items: center;
     padding-top: 10px;;
-    /* width: 100%; */
-    /* height: 100%; */
 }
 
 .ascii-line {
     white-space: nowrap;
     font-family: "Roboto Mono", monospace;
-    /* pointer-events: none; */
 }
 
 a {
