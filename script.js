@@ -80,7 +80,7 @@ const makeLines = () => {
     }
     
     texts[0] = functions[funcnum][0];
-    texts[lines.length - 1] = 'ari-goldman | <a href="https://github.com/ari-goldman/ascii-functions/settings/pages">github</a>';
+    texts[lines.length - 1] = 'ari-goldman | <a href="https://github.com/ari-goldman">github</a>';
     graph();
 }
 
