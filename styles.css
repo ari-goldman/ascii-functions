@@ -22,13 +22,35 @@ body {
     justify-content: center;
     align-items: center;
     padding-top: 10px;;
+    font-family: "Roboto Mono", monospace;
 }
 
 .ascii-line {
     white-space: nowrap;
-    font-family: "Roboto Mono", monospace;
+    cursor:cell;
 }
+
 
 a {
     color: inherit;
+}
+
+span {
+    background-color: transparent;
+    border: none;
+    color: inherit;
+    text-align: center;
+    font-size: inherit;
+    width: auto;
+    min-width: 1em;
+    border-bottom: #a0b9ba dashed 2px;
+    cursor: text;
+}
+
+text {
+}
+
+span:focus {
+    border-bottom: #a0b9ba solid 2px;
+    outline: none;
 }
