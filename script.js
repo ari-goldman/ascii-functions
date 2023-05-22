@@ -7,26 +7,32 @@ functions = [
     "tan(x/2)",
     "3*cos(x/2) mod 2",
     "sin(x) - cos(x/2)/2 - sin(x/4)/4",
-    "4 / PI * (sin(PI*x/4) + sin(3*PI*x/4)/3 + sin(5*PI*x/4)/5 + sin(7*PI*x/4)/7)"
-    // ["5th degree fourier of a square wave", (x) => { x /= 4; return 4 / pi * (Math.sin(pi * x) + Math.sin(pi * x * 3) / 3 + Math.sin(pi * x * 5) / 5 + Math.sin(pi * x * 7) / 7)}],
+    "ceil(rand / 10 + .95) * cos(x/2)",
+    "4 / PI * (sin(PI*x/4) + sin(3*PI*x/4)/3 + sin(5*PI*x/4)/5 + sin(7*PI*x/4)/7)",
+    "(sin(2*x) * (sign(sin(2*x)) == 1)) + (cos(2*x) * (sign(cos(2*x)) == -1))",
+    "((x mod 0.001 <= 0.0005) * sin(x)) + ((x mod 0.001 > 0.0005) * cos(x))"
 ];
 var symbols = ['#', '&', '%', '@']
 
+// was to be able to use other symbols for the graph, but only # looks decent
 const symbol = symbols[0] //symbols[Math.floor(Math.random() * symbols.length)]; -- only the hashtag looks good...
 
 var lines = [];
 var texts = [];
 var numlines, chars;
 
-let randoffset = 2 * Math.PI * Math.random();
-var bounds = [randoffset, 4 * Math.PI + randoffset];
+// random starting offset for bounds
+const randoffset = 2 * pi * Math.random();
+var bounds = [randoffset, 4 * pi + randoffset];
 
 var speed = Math.random() * 101 + 100;
 
+// returns true if x is within .5 of y
 const close = (x, y) => {
-    return Math.abs((x - y) / y) <= 0.1;
+    return Math.abs(x - y) <= 0.5;
 }
 
+// returns all the y values for each character in the bounds
 const plot = (xMin, xMax) => {
     let f = parse(lines[0].innerText);
 
@@ -43,9 +49,11 @@ const plot = (xMin, xMax) => {
     return pts;
 }
 
+// parses the given function to make functions use the math class
 const parse = (f) => {
     f = f.replace(/E/g, "Math.E")
         .replace(/PI/g, "Math.PI")
+        .replace(/π/g, "Math.PI")
 
         .replace(/\^/g, "**")
         .replace(/mod/g, "%")
@@ -56,6 +64,7 @@ const parse = (f) => {
         .replace(/tan/g, "Math.tan")
 
         .replace(/abs/g, "Math.abs")
+        .replace(/sign/g, "Math.sign")
         .replace(/ceil/g, "Math.ceil")
         .replace(/floor/g, "Math.floor")
         .replace(/round/g, "Math.round")
@@ -64,11 +73,8 @@ const parse = (f) => {
     return f;
 }
 
-// const func = (x) => {
-//     // return 10 * (Math.sin(2 * x) + Math.cos(x));
-//     return 8 * funcs[1](x);
-// }
 
+// updates texts array with proper lines to show graph of function
 const graph = () => {
     for (y = 1; y < lines.length - 1; y++) {
         texts[y] = "";
@@ -93,6 +99,7 @@ const graph = () => {
     updateLines();
 }
 
+// fills text tags with the texts in texts array
 const updateLines = () => {
     for (let i = 1; i < texts.length - 1; i++) {
         lines[i].innerHTML = texts[i];
@@ -120,11 +127,9 @@ const makeLines = () => {
         texts.push("");
     }
     
-    // texts[lines.length - 1] = 'ari-goldman | <a href="https://github.com/ari-goldman/" target="_blank">github</a>';
-    // lines[texts.length - 1].innerHTML = texts[texts.length - 1];
     lines[lines.length - 1].classList.remove("ascii-line");
     lines[lines.length - 1].classList.add("footer")
-    lines[lines.length - 1].innerHTML = 'ari-goldman | <a href="https://github.com/ari-goldman/" target="_blank">github</a>';
+    lines[lines.length - 1].innerHTML = '<<a href="https://github.com/ari-goldman/ascii-functions" target="_blank">documentation</a>>';
     
     graph();
 }
@@ -136,7 +141,6 @@ var interval = setInterval(() => {
     let diff = (bounds[1] - bounds[0]);
     bounds[0] += diff / chars;
     bounds[1] += diff / chars;
-    console.log(parse(lines[0].innerText));
     graph();
 }, 100 / (speed / 100));
 
