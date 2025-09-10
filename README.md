@@ -1,4 +1,4 @@
-# [wave web](https://ari-goldman.github.io/ascii-functions/)
+# [wave web](https://ascii-functions.ari-goldman.xyz)
 
 ## how to use
 
